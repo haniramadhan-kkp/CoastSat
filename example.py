@@ -3,9 +3,7 @@
 #==========================================================#
 
 # Add by Hani Ramadhan
-import ee
-ee.Authenticate()
-ee.Initialize(project='igtabrasi')
+ee_project = 'igtabrasi'
 
 
 # Kilian Vos WRL 2018
@@ -67,7 +65,7 @@ inputs = {
         }
 
 # before downloading the images, check how many images are available for your inputs
-SDS_download.check_images_available(inputs);
+SDS_download.check_images_available(inputs, ee_project);
 
 #%% 2. Retrieve images
 

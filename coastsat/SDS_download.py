@@ -37,7 +37,7 @@ from coastsat import SDS_preprocess, SDS_tools, gdal_merge
 np.seterr(all='ignore') # raise/ignore divisions by 0 and nans
 gdal.PushErrorHandler('CPLQuietErrorHandler')
 
-def authenticate_and_initialize():
+def authenticate_and_initialize(ee_project):
     """
     Authenticates and initializes the Earth Engine API.
     This function handles the authentication and initialization process:
@@ -47,7 +47,7 @@ def authenticate_and_initialize():
     """
     # first try to initialize connection with GEE server with existing token
     try: 
-        ee.Initialize()
+        ee.Initialize(project=ee_project)
         print('GEE initialized (existing token).')
     except:
         # if token is expired, try to refresh it
@@ -66,7 +66,7 @@ def authenticate_and_initialize():
         except:
             # get the user to authenticate manually and initialize the sesion
             ee.Authenticate()
-            ee.Initialize()
+            ee.Initialize(project=ee_project)
             print('GEE initialized (manual authentication).')
             
 def retrieve_images(inputs):
@@ -563,7 +563,7 @@ def get_metadata(inputs):
 # AUXILIARY FUNCTIONS
 ###################################################################################################
 
-def check_images_available(inputs):
+def check_images_available(inputs, ee_project):
     """
     Scan the GEE collections to see how many images are available for each
     satellite mission (L5,L7,L8,L9,S2), collection (C02) and tier (T1,T2).
@@ -595,7 +595,7 @@ def check_images_available(inputs):
         raise Exception('Verify that your dates are in the correct chronological order')
 
     # check if EE was initialised or not
-    authenticate_and_initialize()
+    authenticate_and_initialize(ee_project)
         
     print('Number of images available between %s and %s:'%(dates_str[0],dates_str[1]), end='\n')
     
