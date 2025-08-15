@@ -730,7 +730,7 @@ def polygon_from_kml(fn):
     str1 = '<coordinates>'
     str2 = '</coordinates>'
     subdoc = doc[doc.find(str1)+len(str1):doc.find(str2)]
-    coordlist = subdoc.split('\n')
+    coordlist = subdoc.split()
     # read coordinates
     polygon = []
     for i in range(1,len(coordlist)-1):

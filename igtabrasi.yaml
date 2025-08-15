@@ -1,0 +1,44 @@
+dates:
+  - '2025-01-01'
+  - '2025-01-31'
+
+sat_list:
+  - L5
+  - L7
+  - L8
+  - L9
+  - S2
+
+sitename: 'NARRA'
+
+ee_project: 'igtabrasi'
+
+# Hapus baris ini jika tidak ingin menerapkan LandsatWRS
+LandsatWRS: '089083'
+
+# Hapus baris ini jika tidak ingin menerapkan S2tile
+S2tile: '56HLH'
+
+skip_L7_SLC: true
+
+# =====================================================================
+# SETTINGS
+# =====================================================================
+settings:
+  # General parameters:
+  cloud_thresh: 0.1 # Maksimum persentase cloud cover untuk digunakan
+  dist_clouds: 300 # Jarak (meter) sekitar awan yang tidak akan dipetakan garis pantainya
+  output_epsg: 28356 # EPSG code untuk sistem koordinat output
+
+  # Quality control:
+  check_detection: false # Jika true, tampilkan setiap deteksi shoreline untuk validasi manual
+  adjust_detection: false # Jika true, izinkan pengguna menyesuaikan threshold deteksi shoreline
+  save_figure: true # Jika true, simpan gambar hasil mapping shoreline untuk tiap citra
+
+  # [ONLY FOR ADVANCED USERS] Shoreline detection parameters:
+  min_beach_area: 1000 # Luas minimum (m²) agar objek dikategorikan sebagai pantai
+  min_length_sl: 500 # Panjang minimum (m) dari garis pantai yang valid
+  cloud_mask_issue: false # True jika banyak pixel pasir tertutup mask hitam
+  sand_color: default # Opsi: default, latest, dark (pasir gelap), bright (pasir putih)
+  pan_off: false # True untuk mematikan pansharpening pada Landsat 7/8/9
+  s2cloudless_prob: 40 # Threshold cloud probability mask untuk Sentinel-2

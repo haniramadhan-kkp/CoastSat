@@ -69,7 +69,7 @@ def authenticate_and_initialize(ee_project):
             ee.Initialize(project=ee_project)
             print('GEE initialized (manual authentication).')
             
-def retrieve_images(inputs):
+def retrieve_images(inputs, ee_project):
     """
     Downloads all images from Landsat 5, Landsat 7, Landsat 8, Landsat 9 and Sentinel-2
     covering the area of interest and acquired between the specified dates.
@@ -113,10 +113,10 @@ def retrieve_images(inputs):
 
     """
     # initialise connection with GEE server
-    authenticate_and_initialize()
+    authenticate_and_initialize(ee_project)
 
     # check image availabiliy and retrieve list of images
-    im_dict_T1, im_dict_T2 = check_images_available(inputs)
+    im_dict_T1, im_dict_T2 = check_images_available(inputs, ee_project)
 
     # if user also wants to download T2 images, merge both lists
     if 'include_T2' in inputs.keys():
