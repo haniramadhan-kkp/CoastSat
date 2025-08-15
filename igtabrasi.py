@@ -79,20 +79,13 @@ if 'S2tile' in config:
     # option to skip L7 images affected by the Scan-Line-Correction error after 31st May 2003
 
 inputs['skip_L7_SLC'] = config['skip_L7_SLC']
-
-
-
+# only uncomment this line if you want Landsat Tier 2 images (not suitable for time-series analysis)
+# inputs['include_T2'] = True
 
 # before downloading the images, check how many images are available for your inputs
 SDS_download.check_images_available(inputs, ee_project);
 
-
 #%% 2. Retrieve images
-
-
-# only uncomment this line if you want Landsat Tier 2 images (not suitable for time-series analysis)
-# inputs['include_T2'] = True
-
 # retrieve satellite images from GEE
 metadata = SDS_download.retrieve_images(inputs, ee_project)
 
