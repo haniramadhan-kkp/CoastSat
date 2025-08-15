@@ -2,6 +2,12 @@
 # Shoreline extraction from satellite images
 #==========================================================#
 
+# Add by Hani Ramadhan
+import ee
+ee.Authenticate()
+ee.Initialize(project='igtabrasi')
+
+
 # Kilian Vos WRL 2018
 
 #%% 1. Initial settings
@@ -39,10 +45,10 @@ polygon = [[[151.301454, -33.700754],
 polygon = SDS_tools.smallest_rectangle(polygon)
 
 # date range
-dates = ['1984-01-01', '2025-01-01']
+dates = ['2025-01-01', '2025-01-31']
 
 # satellite missions
-sat_list = ['L5','L7','L8','L9']
+sat_list = ['L5','L7','L8','L9','S2']
 # name of the site
 sitename = 'NARRA'
 
@@ -56,8 +62,8 @@ inputs = {
     'sat_list': sat_list,
     'sitename': sitename,
     'filepath': filepath_data,
-    # 'LandsatWRS': '089083',
-    # 'S2tile': '56HLH',
+    'LandsatWRS': '089083',
+    'S2tile': '56HLH',
         }
 
 # before downloading the images, check how many images are available for your inputs
@@ -66,7 +72,7 @@ SDS_download.check_images_available(inputs);
 #%% 2. Retrieve images
 
 # option to skip L7 images affected by the Scan-Line-Correction error after 31st May 2003
-# inputs['skip_L7_SLC'] = True
+inputs['skip_L7_SLC'] = True
 
 # only uncomment this line if you want Landsat Tier 2 images (not suitable for time-series analysis)
 # inputs['include_T2'] = True
